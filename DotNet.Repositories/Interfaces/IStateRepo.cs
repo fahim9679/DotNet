@@ -9,10 +9,10 @@ namespace DotNet.Repositories.Interfaces
 {
     public interface IStateRepo
     {
-        IEnumerable<State> GetAll();
-        State GetById(int id);
-        void Save(State state);
-        void Edit(State state);
-        void RemoveData(State state);
+        Task<IEnumerable<State>> GetAll();
+        Task<State> GetById(int id);
+        Task Save(State state);
+        Task Edit(State state);
+        Task RemoveData(State state);
     }
 }

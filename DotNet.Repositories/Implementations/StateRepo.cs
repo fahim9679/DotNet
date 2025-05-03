@@ -18,34 +18,34 @@ namespace DotNet.Repositories.Implementations
             _context = context;
         }
 
-        public void Edit(State state)
+        public async Task Edit(State state)
         {
             _context.States.Update(state);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<State> GetAll()
+        public async Task<IEnumerable<State>> GetAll()
         {
-            var States=_context.States.Include(x=>x.Country).ToList();
+            var States=await _context.States.Include(x=>x.Country).ToListAsync();
             return States;
         }
 
-        public State GetById(int id)
+        public async  Task<State> GetById(int id)
         {
-            var State = _context.States.SingleOrDefault(x => x.Id == id);
+            var State = await _context.States.SingleOrDefaultAsync(x => x.Id == id);
             return State;
         }
 
-        public void RemoveData(State state)
+        public async Task RemoveData(State state)
         {
             _context.States.Remove(state);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Save(State state)
+        public async Task Save(State state)
         {
-            _context.States.Add(state);
-            _context.SaveChanges();
+           await _context.States.AddAsync(state);
+           await _context.SaveChangesAsync();
         }
     }
 }

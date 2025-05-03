@@ -2,6 +2,7 @@
 using DotNet.Repositories.Interfaces;
 using DotNet.UI.ViewModels.CountryViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DotNet.UI.Controllers
 {
@@ -14,10 +15,10 @@ namespace DotNet.UI.Controllers
             _countryRepo = countryRepo;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             List<CountryViewModel> vm = new List<CountryViewModel>();
-            var countries= _countryRepo.GetAll();
+            var countries= await _countryRepo.GetAll();
             foreach(var country in countries)
             {
                 vm.Add(new CountryViewModel { Id = country.Id,Name = country.Name });
@@ -31,18 +32,18 @@ namespace DotNet.UI.Controllers
             return View(cvm);
         }
         [HttpPost]
-        public IActionResult Create(CreateCountryViewModel vm)
+        public async Task<IActionResult> Create(CreateCountryViewModel vm)
         {
             var country=new Country { 
                 Name = vm.Name
             };
-            _countryRepo.Save(country);
+           await  _countryRepo.Save(country);
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var country=_countryRepo.GetById(id);
+            var country=await _countryRepo.GetById(id);
             CountryViewModel vm = new CountryViewModel { 
                 Id = country.Id,
                 Name = country.Name
@@ -50,17 +51,17 @@ namespace DotNet.UI.Controllers
             return View(vm);
         }
         [HttpPost]
-        public IActionResult Edit(CountryViewModel vm)
+        public async Task<IActionResult> Edit(CountryViewModel vm)
         {
             var country=new Country{Id=vm.Id, Name = vm.Name};
-            _countryRepo.Edit(country);
+            await _countryRepo.Edit(country);
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var country = _countryRepo.GetById(id);
-            _countryRepo.RemoveData(country);
+            var country = await _countryRepo.GetById(id);
+            await _countryRepo.RemoveData(country);
             return RedirectToAction("Index");
         }
     }

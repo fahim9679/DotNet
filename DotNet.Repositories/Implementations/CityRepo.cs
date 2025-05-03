@@ -18,32 +18,32 @@ namespace DotNet.Repositories.Implementations
             _context = context;
         }
 
-        public void Edit(City city)
+        public async Task Edit(City city)
         {
             _context.Cities.Update(city);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<City> GetAll()
+        public async Task<IEnumerable<City>> GetAll()
         {
-            return _context.Cities.Include(x=>x.State).ThenInclude(y=>y.Country).ToList(); ;
+            return await _context.Cities.Include(x=>x.State).ThenInclude(y=>y.Country).ToListAsync(); ;
         }
 
-        public City GetById(int id)
+        public async Task<City> GetById(int id)
         {
-            return _context.Cities.FirstOrDefault(x => x.Id == id);
+            return await _context.Cities.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public void RemoveData(City city)
+        public async Task RemoveData(City city)
         {
             _context.Cities.Remove(city);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Save(City city)
+        public async Task Save(City city)
         {
-            _context.Cities.Add(city);
-            _context.SaveChanges();
+           await _context.Cities.AddAsync(city);
+           await _context.SaveChangesAsync();
         }
     }
 }
