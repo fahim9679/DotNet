@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DotNet.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,18 @@ namespace DotNet.UI.ViewComponents
 {
     public class CountCityViewComponent : ViewComponent
     {
+        private readonly ICityRepo _cityRepo;
+
+        public CountCityViewComponent(ICityRepo cityRepo)
+        {
+            _cityRepo = cityRepo;
+        }
+
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View();
+            var cities=await _cityRepo.GetAll();
+            int TotalCities=cities.Count();
+            return View(TotalCities);
         }
     }
 }
