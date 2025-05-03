@@ -1,4 +1,6 @@
 using DotNet.Repositories;
+using DotNet.Repositories.Implementations;
+using DotNet.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("DotNet.UI")));
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<ICountryRepo, CountryRepo>();
+builder.Services.AddScoped<IStateRepo, StateRepo>();
+builder.Services.AddScoped<ICityRepo, CityRepo>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
