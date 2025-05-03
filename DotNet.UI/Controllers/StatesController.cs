@@ -1,5 +1,6 @@
 ﻿using DotNet.Entities;
 using DotNet.Repositories.Interfaces;
+using DotNet.UI.ViewModels.StateViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -19,7 +20,12 @@ namespace DotNet.UI.Controllers
         public IActionResult Index()
         {
             var states=_stateRepo.GetAll();
-            return View(states);
+            var vm=new List<StateViewModel>();
+            foreach (var state in states)
+            {
+                vm.Add(new StateViewModel { Id = state.Id, StateName = state.Name, CountryName = state.Country.Name });
+            }
+            return View(vm);
         }
         [HttpGet]
         public IActionResult Create()
@@ -29,8 +35,13 @@ namespace DotNet.UI.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(State state)
+        public IActionResult Create(CreateStateViewModel vm)
         {
+            var state = new State
+            {
+                Name=vm.StateName,
+                CountryId=vm.CountryId
+            };
             _stateRepo.Save(state);
             return RedirectToAction("Index");
         }
@@ -38,14 +49,27 @@ namespace DotNet.UI.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+
             var state=_stateRepo.GetById(id);
+            var vm = new EditStateViewModel
+            {
+                Id = state.Id,
+                StateName = state.Name,
+                CountryId=state.CountryId,
+            };
             var countries = _countryRepo.GetAll();
             ViewBag.CountryList = new SelectList(countries, "Id", "Name");
-            return View(state);
+            return View(vm);
         }
         [HttpPost]
-        public IActionResult Edit(State state)
+        public IActionResult Edit(EditStateViewModel vm)
         {
+            var state = new State
+            {
+                Id=vm.Id,
+                Name = vm.StateName,
+                CountryId = vm.CountryId,
+            };
             _stateRepo.Edit(state);
             return RedirectToAction("Index");
         }
