@@ -1,5 +1,6 @@
 ﻿using DotNet.Entities;
 using DotNet.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +20,13 @@ namespace DotNet.Repositories.Implementations
 
         public void Edit(City city)
         {
-            _context.Cities.Add(city);
+            _context.Cities.Update(city);
             _context.SaveChanges();
         }
 
         public IEnumerable<City> GetAll()
         {
-            return _context.Cities.ToList(); ;
+            return _context.Cities.Include(x=>x.State).ThenInclude(y=>y.Country).ToList(); ;
         }
 
         public City GetById(int id)
