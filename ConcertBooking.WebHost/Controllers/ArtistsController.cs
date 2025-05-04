@@ -71,7 +71,7 @@ namespace ConcertBooking.WebHost.Controllers
             artist.Name = vm.Name;
             artist.Bio = vm.Bio;
             
-            if (vm.ImageUrl != null)
+            if (vm.ChooseImage != null)
             {
                 artist.ImageUrl=await _utilityRepo.EditImage(containerName,vm.ChooseImage,artist.ImageUrl);
             }

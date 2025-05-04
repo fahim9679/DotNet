@@ -20,7 +20,7 @@ namespace ConcertBooking.Repositories.Implementations
 
         public async Task Edit(Venue venue)
         {
-            _context.Venues.Add(venue);
+            _context.Venues.Update(venue);
             await _context.SaveChangesAsync();
         }
 
