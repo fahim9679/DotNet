@@ -17,5 +17,9 @@
   <ItemGroup>
     <ProjectReference Include="..\DotNet.Repositories\DotNet.Repositories.csproj" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="wwwroot\CountryImgae\" />
+  </ItemGroup>
 
 </Project>
