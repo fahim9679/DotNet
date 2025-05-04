@@ -11,6 +11,6 @@ namespace DotNet.Repositories.Interfaces
     {
         Task<string> SaveImage(string ContainerName,IFormFile file);
         Task<string> EditImage(string ContainerName,IFormFile file, string dbPath);
-        Task DeleteFile(string ContainerName, string dbPath);
+        Task DeleteImage(string ContainerName, string dbPath);
     }
 }

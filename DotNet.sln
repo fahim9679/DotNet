@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet.Web", "DotNet.Web\DotNet.Web.csproj", "{8FC8DD78-676C-4ECC-B12B-F0651E7A618F}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet.Repositories", "DotNet.Repositories\DotNet.Repositories.csproj", "{BC89364C-BFD0-45A4-95C4-3C1BD74E81E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet.UI", "DotNet.UI\DotNet.UI.csproj", "{275365D5-4229-4C54-9D85-EDC34B7E22EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertBooking.Entities", "ConcertBooking.Entities\ConcertBooking.Entities.csproj", "{9A66E3B7-61B9-4EE5-93BD-CD4C59DE932D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertBooking.Repositories", "ConcertBooking.Repositories\ConcertBooking.Repositories.csproj", "{5085A5A4-3B53-4796-A4F5-EA5B2125083D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{275365D5-4229-4C54-9D85-EDC34B7E22EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{275365D5-4229-4C54-9D85-EDC34B7E22EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{275365D5-4229-4C54-9D85-EDC34B7E22EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A66E3B7-61B9-4EE5-93BD-CD4C59DE932D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A66E3B7-61B9-4EE5-93BD-CD4C59DE932D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A66E3B7-61B9-4EE5-93BD-CD4C59DE932D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A66E3B7-61B9-4EE5-93BD-CD4C59DE932D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5085A5A4-3B53-4796-A4F5-EA5B2125083D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5085A5A4-3B53-4796-A4F5-EA5B2125083D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5085A5A4-3B53-4796-A4F5-EA5B2125083D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5085A5A4-3B53-4796-A4F5-EA5B2125083D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
