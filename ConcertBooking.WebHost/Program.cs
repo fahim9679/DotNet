@@ -13,6 +13,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IVenueRepo, VenueRepo>();
 builder.Services.AddScoped<IArtistRepo, ArtistRepo>();
 builder.Services.AddScoped<IConcertRepo, ConcertRepo>();
+builder.Services.AddScoped<IUtilityRepo, UtilityRepo>();
 
 var app = builder.Build();
 
