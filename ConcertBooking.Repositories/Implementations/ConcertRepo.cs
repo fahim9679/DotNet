@@ -31,7 +31,7 @@ namespace ConcertBooking.Repositories.Implementations
 
         public async Task<Concert> GetById(int id)
         {
-            return await _context.Concerts.FirstOrDefaultAsync(x=>x.Id==id);
+            return await _context.Concerts.Include(x => x.Venue).Include(y => y.Artist).FirstOrDefaultAsync(x=>x.Id==id);
         }
 
         public async Task RemoveData(Concert concert)
