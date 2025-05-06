@@ -13,6 +13,7 @@
         <div>Venue Date & Time: @Model.ConcertDateTime.ToString("MMm dd yyyy hh:mm tt")</div>
         <div class="mt-2"><img src="@Model.ArtistImage" class="rounded-circle img-fluid" style="width:150px;height:150px" /> </div>
         <div>Artist Namee: @Model.ArtistName</div>
+        <div class="mt-3"><a class="btn btn-success" asp-action="AvailableTikets" asp-route-id="@Model.ConcertId">See Available Tickets</a></div>
 
     </div>
 </div>
