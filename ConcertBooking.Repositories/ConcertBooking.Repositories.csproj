@@ -13,6 +13,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\ConcertBooking.Entities\ConcertBooking.Entities.csproj" />
+		<ProjectReference Include="..\ConcertBooking.Infrastructure\ConcertBooking.Infrastructure.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
