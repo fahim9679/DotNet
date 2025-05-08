@@ -20,7 +20,7 @@ namespace ConcertBooking.Repositories.Implementations
 
         public async Task<IEnumerable<int>> GetBookedTickets(int concertId)
         {
-           var bookedTickets = await _context.Tickets.Where(x=>x.ConcertId == concertId && x.IsBooked).Select(t=>t.SeatNumber).ToListAsync();
+           var bookedTickets = await _context.Tickets.Include(y=>y.Booking).Where(x=>x.Booking.ConcertId == concertId && x.IsBooked).Select(t=>t.SeatNumber).ToListAsync();
             return bookedTickets;
         }
     }
