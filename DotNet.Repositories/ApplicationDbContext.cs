@@ -13,5 +13,14 @@ namespace DotNet.Repositories
         public DbSet<State> States { get; set; } 
         public DbSet<City> Cities { get; set; } 
         public DbSet<UserInfo> UserInfo { get; set; }
+        public DbSet<Student> Students{ get; set; }
+        public DbSet<Skill> Skills { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<StudentSkill>()
+                .HasKey(x => new { x.StudentId, x.SkillId });
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
