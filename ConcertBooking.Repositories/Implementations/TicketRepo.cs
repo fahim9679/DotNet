@@ -23,5 +23,14 @@ namespace ConcertBooking.Repositories.Implementations
            var bookedTickets = await _context.Tickets.Include(y=>y.Booking).Where(x=>x.Booking.ConcertId == concertId && x.IsBooked).Select(t=>t.SeatNumber).ToListAsync();
             return bookedTickets;
         }
+
+        public async Task<IEnumerable<Booking>> GetBookings(string userId)
+        {
+           var bookings=await _context.Bookings.Where(x=>x.UserId == userId)
+                .Include(y=>y.Tickets).Include(z=>z.Concert).ToListAsync();
+            return bookings;
+        }
+
+        
     }
 }
