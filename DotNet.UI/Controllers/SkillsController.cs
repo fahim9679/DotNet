@@ -1,7 +1,6 @@
 ﻿using DotNet.Entities;
 using DotNet.Repositories.Interfaces;
 using DotNet.UI.ViewModels.SkillViewModels;
-using DotNet.UI.ViewModels.SkillViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNet.UI.Controllers

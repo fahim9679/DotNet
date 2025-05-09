@@ -31,7 +31,7 @@ namespace DotNet.Repositories.Implementations
 
         public async Task<Student> GetById(int id)
         {
-            return await _context.Students.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Students.Include(s=>s.StudentSkills).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task RemoveData(Student student)
