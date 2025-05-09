@@ -9,7 +9,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
-               
+
                 @if (User.IsInRole(GlobalConfiguration.Admin_Role))
                 {
                     <li class="nav-item">
@@ -21,7 +21,7 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Artists" asp-action="Index">Artist</a>
                     </li>
-                    <li class="nav-item dropdown">
+                   @*  <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Action</a>
@@ -30,6 +30,13 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Separated link</a>
                         </div>
+                    </li> *@
+
+                }
+                @if(User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Tickets" asp-action="MyTickets">My Tickets</a>
                     </li>
                 }
             </ul>
