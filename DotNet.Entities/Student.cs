@@ -10,6 +10,7 @@ namespace DotNet.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public Address PermanentAddress { get; set; }
         public ICollection<StudentSkill> StudentSkills { get; set; } =new List<StudentSkill>();
     }
 }

@@ -46,6 +46,7 @@ namespace DotNet.UI.Controllers
             var student = new Student
             {
                 Name=vm.StudentName,
+                PermanentAddress=vm.PhysicalAddress,
             };
             var selectedSkillIds=vm.SkillList.Where(x=>x.IsChecked==true)
                 .Select(y=>y.SkillId).ToList();
@@ -66,7 +67,8 @@ namespace DotNet.UI.Controllers
             EditStudentViewModel vm = new EditStudentViewModel
             {
                 Id = student.Id,
-                StudentName = student.Name,               
+                StudentName = student.Name,
+                PhysicalAddress=student.PermanentAddress,
             };
             
             var existingSkillId=student.StudentSkills.Select(x=>x.SkillId).ToList();
@@ -80,6 +82,39 @@ namespace DotNet.UI.Controllers
                     IsChecked = existingSkillId.Contains(skill.Id) });
             }
             return View(vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditStudentViewModel vm)
+        {
+            var student=await _studentRepo.GetById(vm.Id);
+            var existingSkillId = student.StudentSkills.Select(x => x.SkillId).ToList();
+            student.Name=vm.StudentName;
+            student.PermanentAddress = vm.PhysicalAddress;
+            var selectedSkillIds = vm.SkillList.Where(x => x.IsChecked == true)
+                .Select(y => y.SkillId).ToList();
+            var toRemove=existingSkillId.Except(selectedSkillIds).ToList();
+            var toAdd= selectedSkillIds.Except(existingSkillId).ToList();
+            foreach (var skillId in toRemove)
+            {
+                var studentSkill = student.StudentSkills.FirstOrDefault(x => x.SkillId == skillId);
+                student.StudentSkills.Remove(studentSkill);
+            }
+            foreach (var SkillId in toAdd)
+            {
+                student.StudentSkills.Add(new StudentSkill
+                {
+                    SkillId = SkillId
+                });
+            }
+            await _studentRepo.Edit(student);
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var student = await _studentRepo.GetById(id);
+            await _studentRepo.RemoveData(student);
+            return RedirectToAction("Index");
         }
     }
 }
