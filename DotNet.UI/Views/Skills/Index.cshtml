@@ -4,18 +4,27 @@
 }
 
 <h1>Skills List</h1>
-
-<p>
-    <a asp-action="Create" class="btn btn-info">Create New</a>
-</p>
+<div class="row">
+    <div class="col-6">
+        <p>
+            <a asp-action="Create" class="btn btn-info">Create New</a>
+        </p>
+    </div>
+    <div class="col-6">
+        <form asp-action="Index" method="post">
+            <input type="text" name="searchText" value="@ViewData["filterData"]" />
+            <button type="submit" value="Search">Search</button>
+        </form>
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>
             <th>
-                Id
+                <a asp-route-sortOrder="@ViewData["IdSort"]" asp-route-sortOrder="@ViewData["SortFilter"]" asp-route-fillerText="@ViewData["filterData"]">Id</a>
             </th>
             <th>
-                Title
+                <a asp-route-sortOrder="@ViewData["TitleSort"]" asp-route-sortOrder="@ViewData["SortFilter"]" asp-route-fillerText="@ViewData["filterData"]">Title</a>
             </th>
             <th></th>
         </tr>
@@ -43,5 +52,5 @@
     var Previous = Model.PageInfo.HasPrevious ? "" : "disabled";
     var Next = Model.PageInfo.HasNext ? "" : "disabled";
 }
-<a class="btn btn-info @Previous" asp-route-pageNumber="@(Model.PageInfo.PageNumber-1)">Pre</a>
-<a class="btn btn-info @Next" asp-route-pageNumber="@(Model.PageInfo.PageNumber+1)">Next</a>
+<a asp-route-sortOrder="@ViewData["SortFilter"]" asp-route-fillerText="@ViewData["filterData"]" class="btn btn-info @Previous" asp-route-pageNumber="@(Model.PageInfo.PageNumber-1)">Pre</a>
+<a asp-route-sortOrder="@ViewData["SortFilter"]" asp-route-fillerText="@ViewData["filterData"]" class="btn btn-info @Next" asp-route-pageNumber="@(Model.PageInfo.PageNumber+1)">Next</a>

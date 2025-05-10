@@ -14,21 +14,45 @@ namespace DotNet.UI.Controllers
             _skillRepo = skillRepo;
         }
 
-        public async Task<IActionResult> Index(int pageNumber=1,int pageSize=3)
+        public async Task<IActionResult> Index(string sortOrder, string fillerText, int pageNumber = 1, int pageSize = 3, string searchText = null)
         {
             List<SkillViewModel> vm = new List<SkillViewModel>();
+            ViewData["SortFilter"] = sortOrder;
+            ViewData["IdSort"] = sortOrder== "Id_desc"?"": "Id_desc";
+            ViewData["TitleSort"]= sortOrder == "Title_desc" ? "Title_asc" : "Title_desc";
             var skills = await _skillRepo.GetAll();
-            int totalItems=skills.Count();
+            if (searchText != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchText = fillerText;
+            }
+            ViewData["filterData"] = searchText;
+            switch (sortOrder)
+            {
+                case "Id_desc": skills=skills.OrderByDescending(x => x.Id).ToList(); break;
+                case "Title_desc": skills = skills.OrderByDescending(x => x.Title).ToList(); break;
+                case "Title_asc": skills = skills.OrderBy(x => x.Title).ToList(); break;
+                default: skills = skills.OrderBy(x => x.Id).ToList(); break;
+
+            }
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                skills = skills.Where(s => s.Title.Contains(searchText));
+            }
+            int totalItems = skills.Count();
             skills = skills.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             foreach (var skill in skills)
             {
                 vm.Add(new SkillViewModel { Id = skill.Id, Title = skill.Title });
             }
-            
+
             var pvm = new PagedSkillViewModel
             {
                 Skills = vm,
-                PageInfo =new Utility.PageInfo
+                PageInfo = new Utility.PageInfo
                 {
                     PageNumber = pageNumber,
                     PageSize = pageSize,
