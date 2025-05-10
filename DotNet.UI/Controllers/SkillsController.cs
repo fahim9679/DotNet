@@ -32,12 +32,16 @@ namespace DotNet.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateSkillViewModel vm)
         {
-            var skill = new Skill
+            if (ModelState.IsValid)
             {
-                Title = vm.Title
-            };
-            await _skillRepo.Save(skill);
-            return RedirectToAction("Index");
+                var skill = new Skill
+                {
+                    Title = vm.Title
+                };
+                await _skillRepo.Save(skill);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)

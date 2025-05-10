@@ -43,22 +43,26 @@ namespace DotNet.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateStudentViewModel vm)
         {
-            var student = new Student
+            if (ModelState.IsValid)
             {
-                Name=vm.StudentName,
-                PermanentAddress=vm.PhysicalAddress,
-            };
-            var selectedSkillIds=vm.SkillList.Where(x=>x.IsChecked==true)
-                .Select(y=>y.SkillId).ToList();
-            foreach (var SkillId in selectedSkillIds)
-            {
-                student.StudentSkills.Add(new StudentSkill
+                var student = new Student
                 {
-                    SkillId= SkillId
-                });
+                    Name = vm.StudentName,
+                    PermanentAddress = vm.PhysicalAddress,
+                };
+                var selectedSkillIds = vm.SkillList.Where(x => x.IsChecked == true)
+                    .Select(y => y.SkillId).ToList();
+                foreach (var SkillId in selectedSkillIds)
+                {
+                    student.StudentSkills.Add(new StudentSkill
+                    {
+                        SkillId = SkillId
+                    });
+                }
+                await _studentRepo.Save(student);
+                return RedirectToAction("Index");
             }
-            await _studentRepo.Save(student);
-            return RedirectToAction("Index");
+            return View();
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
