@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DotNet.UI.ViewModels.SkillViewModels.SkillViewModel>
+﻿@model DotNet.UI.ViewModels.SkillViewModels.PagedSkillViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -12,16 +12,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                Id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Title
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Skills)
         {
             <tr>
                 <td>
@@ -39,3 +39,9 @@
         }
     </tbody>
 </table>
+@{
+    var Previous = Model.PageInfo.HasPrevious ? "" : "disabled";
+    var Next = Model.PageInfo.HasNext ? "" : "disabled";
+}
+<a class="btn btn-info @Previous" asp-route-pageNumber="@(Model.PageInfo.PageNumber-1)">Pre</a>
+<a class="btn btn-info @Next" asp-route-pageNumber="@(Model.PageInfo.PageNumber+1)">Next</a>

@@ -14,15 +14,28 @@ namespace DotNet.UI.Controllers
             _skillRepo = skillRepo;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber=1,int pageSize=3)
         {
             List<SkillViewModel> vm = new List<SkillViewModel>();
             var skills = await _skillRepo.GetAll();
+            int totalItems=skills.Count();
+            skills = skills.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             foreach (var skill in skills)
             {
                 vm.Add(new SkillViewModel { Id = skill.Id, Title = skill.Title });
             }
-            return View(vm);
+            
+            var pvm = new PagedSkillViewModel
+            {
+                Skills = vm,
+                PageInfo =new Utility.PageInfo
+                {
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    TotalItems = totalItems
+                }
+            };
+            return View(pvm);
         }
         [HttpGet]
         public IActionResult Create()
