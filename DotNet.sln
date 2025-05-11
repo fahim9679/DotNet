@@ -19,6 +19,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertBooking.WebHost", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertBooking.Infrastructure", "ConcertBooking.Infrastructure\ConcertBooking.Infrastructure.csproj", "{A6484B65-BDED-49DC-AA25-B4F08B980525}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanStudentManagment.Data", "CleanStudentManagment.Data\CleanStudentManagment.Data.csproj", "{716F012A-16D6-471A-A63C-4044AA04BC5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanStudentManagment.BLL", "CleanStudentManagment.BLL\CleanStudentManagment.BLL.csproj", "{8FBFDE22-3492-444D-9E15-0FCC563A8BF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanStudentManagment.UI", "CleanStudentManagment.UI\CleanStudentManagment.UI.csproj", "{EC6A55C3-4947-4629-BC3D-E404AB44D8E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanStudentManagment.Models", "CleanStudentManagment.Models\CleanStudentManagment.Models.csproj", "{EB2FF85B-36D3-4F20-8606-433D9FCC7875}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +65,22 @@ Global
 		{A6484B65-BDED-49DC-AA25-B4F08B980525}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6484B65-BDED-49DC-AA25-B4F08B980525}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6484B65-BDED-49DC-AA25-B4F08B980525}.Release|Any CPU.Build.0 = Release|Any CPU
+		{716F012A-16D6-471A-A63C-4044AA04BC5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{716F012A-16D6-471A-A63C-4044AA04BC5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{716F012A-16D6-471A-A63C-4044AA04BC5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{716F012A-16D6-471A-A63C-4044AA04BC5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FBFDE22-3492-444D-9E15-0FCC563A8BF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FBFDE22-3492-444D-9E15-0FCC563A8BF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FBFDE22-3492-444D-9E15-0FCC563A8BF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FBFDE22-3492-444D-9E15-0FCC563A8BF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC6A55C3-4947-4629-BC3D-E404AB44D8E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC6A55C3-4947-4629-BC3D-E404AB44D8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC6A55C3-4947-4629-BC3D-E404AB44D8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC6A55C3-4947-4629-BC3D-E404AB44D8E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB2FF85B-36D3-4F20-8606-433D9FCC7875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB2FF85B-36D3-4F20-8606-433D9FCC7875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB2FF85B-36D3-4F20-8606-433D9FCC7875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB2FF85B-36D3-4F20-8606-433D9FCC7875}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
