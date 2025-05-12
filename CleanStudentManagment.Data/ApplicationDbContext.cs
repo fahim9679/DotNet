@@ -15,5 +15,6 @@ namespace CleanStudentManagment.Data
             
         }
         public DbSet<Users> Users { get; set; }
+        public DbSet<Groups> Groups { get; set; }
     }
 }

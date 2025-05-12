@@ -43,7 +43,31 @@ namespace CleanStudentManagment.BLL.Services
 
         public PagedResult<TeacherViewModel> GetAllTeacher(int PageNumber, int PageSize)
         {
-            throw new NotImplementedException();
+            try
+            {
+                int excludeRecords = (PageSize * PageNumber) - PageSize;
+                List<TeacherViewModel> teacherViewModel= new List<TeacherViewModel>();
+                var UserList=_unitOfWork.GenericRepository<Users>().GetAll().Where(x=>x.Role==(int)EnumRoles.Teacher).Skip(excludeRecords).Take(PageSize).ToList();
+                teacherViewModel = ListInfo(UserList);
+                var result=new PagedResult<TeacherViewModel>
+                {
+                    Data = teacherViewModel,
+                    TotalItems= _unitOfWork.GenericRepository<Users>().GetAll().Where(x => x.Role == (int)EnumRoles.Teacher).Count(),
+                    PageNumber = PageNumber,
+                    PageSize = PageSize
+                };
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private List<TeacherViewModel> ListInfo(List<Users> userList)
+        {
+            return userList.Select(x=> new TeacherViewModel(x)).ToList();
         }
 
         public LoginViewModel Login(LoginViewModel loginViewModel)

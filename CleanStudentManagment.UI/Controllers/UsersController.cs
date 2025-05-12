@@ -13,9 +13,9 @@ namespace CleanStudentManagment.UI.Controllers
             _accountService = accountService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber, int pageSize)
         {
-            return View();
+            return View(_accountService.GetAllTeacher(pageNumber,pageSize));
         }
         [HttpGet]
         public IActionResult Create()
@@ -25,7 +25,7 @@ namespace CleanStudentManagment.UI.Controllers
         [HttpPost]
         public IActionResult Create(UserViewModel vm)
         {
-            bool success= _accountService.AddTeacher(vm);
+            bool success = _accountService.AddTeacher(vm);
             if (success)
             {
                 return RedirectToAction("Index");
