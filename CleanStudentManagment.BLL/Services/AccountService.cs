@@ -72,15 +72,28 @@ namespace CleanStudentManagment.BLL.Services
 
         public LoginViewModel Login(LoginViewModel loginViewModel)
         {
-
-            var user = _unitOfWork.GenericRepository<Users>().GetAll()
-                .FirstOrDefault(x => x.UserName == loginViewModel.UserName.Trim()
-                                && x.Password == loginViewModel.Password
-                                && x.Role == loginViewModel.Role);
-            if (user != null)
+            if (loginViewModel.Role == (int)EnumRoles.Teacher || loginViewModel.Role == (int)EnumRoles.Admin)
             {
-                loginViewModel.Id = user.Id;
-                return loginViewModel;
+                var user = _unitOfWork.GenericRepository<Users>().GetAll()
+                    .FirstOrDefault(x => x.UserName == loginViewModel.UserName.Trim()
+                                    && x.Password == loginViewModel.Password
+                                    && x.Role == loginViewModel.Role);
+                if (user != null)
+                {
+                    loginViewModel.Id = user.Id;
+                    return loginViewModel;
+                }
+            }
+            else
+            {
+                var user = _unitOfWork.GenericRepository<Students>().GetAll()
+                   .FirstOrDefault(x => x.UserName == loginViewModel.UserName.Trim()
+                                   && x.Password == loginViewModel.Password);
+                if (user != null)
+                {
+                    loginViewModel.Id = user.Id;
+                    return loginViewModel;
+                }
             }
             return null;
         }
