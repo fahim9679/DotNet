@@ -13,6 +13,5 @@ namespace CleanStudentManagment.BLL.Services
         IEnumerable<GroupViewModel> GetAllGroups();
         GroupViewModel GetGroup(int id);
         GroupViewModel AddGroup(GroupViewModel group);
-
     }
 }
