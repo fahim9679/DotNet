@@ -33,34 +33,6 @@ namespace CleanStudentManagment.BLL.Services
             }
         }
 
-        public bool SetGroupIdToSutdent(GroupStudentViewModel viewModel)
-        {
-            try
-            {
-                foreach (var item in viewModel.StudentList)
-                {
-                    var student = _unitOfWork.GenericRepository<Students>().GetById(item.Id);
-                    if (item.IsChecked == true)
-                    {
-                        student.GroupId = viewModel.GroupId;
-                        _unitOfWork.GenericRepository<Students>().UpdateAsync(student);
-                    }
-                    else
-                    {
-                        student.GroupId = null;
-                    }
-                    
-                }
-                _unitOfWork.Save();
-                return true;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         IEnumerable<StudentViewModel> IStudentService.GetAllStudents()
         {
             try
