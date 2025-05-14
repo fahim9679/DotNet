@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CleanStudentManagment.BLL\CleanStudentManagment.BLL.csproj" />
     <ProjectReference Include="..\CleanStudentManagment.Models\CleanStudentManagment.Models.csproj" />
   </ItemGroup>
