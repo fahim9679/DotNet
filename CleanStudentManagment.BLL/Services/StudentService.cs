@@ -33,6 +33,33 @@ namespace CleanStudentManagment.BLL.Services
             }
         }
 
+        public bool SetGroupIdToStudent(GroupStudentViewModel viewModel)
+        {
+            try
+            {
+                foreach (var student in viewModel.StudentList)
+                {
+                    var studentObj = _unitOfWork.GenericRepository<Students>().GetById(student.Id);
+                    if (student.IsChecked == true)
+                    {
+                        studentObj.GroupId = viewModel.GroupId;
+                        _unitOfWork.GenericRepository<Students>().Update(studentObj);
+                    }
+                    else
+                    {
+                        studentObj.GroupId = null;
+                    }
+                    
+                }
+                _unitOfWork.Save();
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         IEnumerable<StudentViewModel> IStudentService.GetAllStudents()
         {
             try

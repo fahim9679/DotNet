@@ -45,13 +45,24 @@ namespace CleanStudentManagment.UI.Controllers
             vm.GroupId = group.Id;
             foreach (var student in students)
             {
-                vm.StudentList.Add(new CheckBoxTable { 
-                    Id= student.Id,
-                    Name= student.Name,
-                    IsChecked=false
+                vm.StudentList.Add(new CheckBoxTable
+                {
+                    Id = student.Id,
+                    Name = student.Name,
+                    IsChecked = false
                 });
             }
-            return View(vm);  
+            return View(vm);
+        }
+        [HttpPost]
+        public IActionResult Details(GroupStudentViewModel viewModel)
+        {
+            bool result = _studentService.SetGroupIdToStudent(viewModel);
+            if (result)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(viewModel);
         }
     }
 }
