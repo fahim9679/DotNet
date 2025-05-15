@@ -11,6 +11,7 @@ namespace CleanStudentManagment.BLL.Services
     {
         Task<int> AddStudentAsync(CreateStudentViewModel vm);
         IEnumerable<StudentViewModel> GetAllStudents();
+        bool SetExamResult(AttendExamViewModel viewModel);
         bool SetGroupIdToStudent(GroupStudentViewModel viewModel);
     }
 }

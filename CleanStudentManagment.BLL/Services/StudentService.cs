@@ -33,6 +33,32 @@ namespace CleanStudentManagment.BLL.Services
             }
         }
 
+        public bool SetExamResult(AttendExamViewModel viewModel)
+        {
+            try
+            {
+                foreach (var item in viewModel.QnAsList)
+                {
+                    ExamResults results = new ExamResults
+                    {
+                        StudentId = viewModel.StudentId,
+                        ExamId = item.ExamId,
+                        QnAsId = item.Id,
+                        Answer = item.Answer,
+                    };
+                    _unitOfWork.GenericRepository<ExamResults>().Add(results);
+                    _unitOfWork.Save();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return false;
+        }
+
         public bool SetGroupIdToStudent(GroupStudentViewModel viewModel)
         {
             try

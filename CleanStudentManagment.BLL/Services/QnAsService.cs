@@ -58,6 +58,18 @@ namespace CleanStudentManagment.BLL.Services
             }
         }
 
+        public IEnumerable<QnAsViewModel> GetAllQnAsByExamId(int examId)
+        {
+            var qnAs= _unitOfWork.GenericRepository<QnAs>().GetAll().Where(x => x.ExamId == examId).ToList();
+            return ListInfo(qnAs);
+        }
+
+        public bool IsAttended(int examId, int studentId)
+        {
+            var Result= _unitOfWork.GenericRepository<ExamResults>().GetAll().Where(x => x.Id == examId && x.StudentId == studentId);
+            return Result==null ? false : true;
+        }
+
         private List<QnAsViewModel> ListInfo(List<QnAs> qnAsList)
         {
             return qnAsList.Select(x => new QnAsViewModel(x)).ToList();

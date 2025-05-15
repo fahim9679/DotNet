@@ -11,5 +11,8 @@ namespace CleanStudentManagment.BLL.Services
     {
         void AddQnAs(CreateQnAsViewModel vm);
         PagedResult<QnAsViewModel> GetAllQnAs(int pageNumber, int pageSize);
+
+        bool IsAttended(int examId, int studentId);
+        IEnumerable<QnAsViewModel> GetAllQnAsByExamId(int examId);
     }
 }
