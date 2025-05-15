@@ -11,5 +11,6 @@ namespace CleanStudentManagment.BLL.Services
     {
         PagedResult<ExamViewModel> GetAllExams(int pageNumber, int pageSize);
         void AddExam(CreateExamVeiwModel examViewModel);
+        IEnumerable<ExamViewModel> GetAllExams();
     }
 }
