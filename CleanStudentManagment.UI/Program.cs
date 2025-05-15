@@ -11,6 +11,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IExamService, ExamService>();
+builder.Services.AddScoped<IGroupService, GroupService>();
 builder.Services.AddSession(options=>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30); // Set the session timeout to 30 minutes
