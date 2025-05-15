@@ -16,5 +16,15 @@ namespace CleanStudentManagment.Data
         }
         public DbSet<Users> Users { get; set; }
         public DbSet<Groups> Groups { get; set; }
+        public DbSet<Students> Students { get; set; }
+        public DbSet<Exams> Exams { get; set; }
+        public DbSet<QnAs> QnAs { get; set; }
+        public DbSet<ExamResults> ExamResults { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Users>().HasData(new Users { Id = 1, Name = "Admin", UserName = "admin", Password = "admin", Role = 1 });
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

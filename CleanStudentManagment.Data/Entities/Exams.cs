@@ -14,5 +14,8 @@ namespace CleanStudentManagment.Data.Entities
         public DateTime StartDate { get; set; }
         public int Time { get; set; }
         public int GroupId { get; set; }
+        public virtual Groups Groups { get; set; }
+        public virtual ICollection<ExamResults> ExamResults { get; set; }
+        public virtual ICollection<QnAs> QnAss  { get; set; }
     }
 }

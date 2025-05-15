@@ -33,6 +33,11 @@ namespace CleanStudentManagment.BLL.Services
             }
         }
 
+        public IEnumerable<ResultViewModel> GetStudentResult(int studentId)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool SetExamResult(AttendExamViewModel viewModel)
         {
             try
@@ -43,7 +48,7 @@ namespace CleanStudentManagment.BLL.Services
                     {
                         StudentId = viewModel.StudentId,
                         ExamId = item.ExamId,
-                        QnAsId = item.Id,
+                        //QnAsId = item.Id,
                         Answer = item.Answer,
                     };
                     _unitOfWork.GenericRepository<ExamResults>().Add(results);

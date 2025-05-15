@@ -10,8 +10,9 @@ namespace CleanStudentManagment.Data.Entities
     {
         public int Id { get; set; }
         public int StudentId { get; set; }
-        public int QnAsId { get; set; }
+        //public virtual Students Students { get; set; }
         public int ExamId { get; set; }
+        public virtual Exams Exams { get; set; }
         public int Answer { get; set; }
     }
 }
