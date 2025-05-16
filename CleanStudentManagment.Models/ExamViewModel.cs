@@ -17,6 +17,10 @@ namespace CleanStudentManagment.Models
         public DateTime StartDate { get; set; }
         public int Time { get; set; }
         public int GroupId { get; set; }
+        public ExamViewModel()
+        {
+            
+        }
 
         public ExamViewModel(Exams exams)
         {

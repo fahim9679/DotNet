@@ -41,7 +41,7 @@ namespace CleanStudentManagment.UI.Controllers
         {
             GroupStudentViewModel vm = new GroupStudentViewModel();
             var group = _groupService.GetGroup(id);
-            var students = _studentService.GetAllStudents();
+            var students = _studentService.GetAll();
             vm.GroupId = group.Id;
             foreach (var student in students)
             {

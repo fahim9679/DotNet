@@ -9,8 +9,9 @@ namespace CleanStudentManagment.BLL.Services
 {
     public interface IStudentService
     {
+        PagedResult<StudentViewModel> GetAllStudents(int pageNumber, int pageSize);
         Task<int> AddStudentAsync(CreateStudentViewModel vm);
-        IEnumerable<StudentViewModel> GetAllStudents();
+        IEnumerable<StudentsViewModel> GetAll();
         IEnumerable<ResultViewModel> GetStudentResult(int studentId);
         bool SetExamResult(AttendExamViewModel viewModel);
         bool SetGroupIdToStudent(GroupStudentViewModel viewModel);

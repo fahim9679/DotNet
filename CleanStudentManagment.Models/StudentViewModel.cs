@@ -9,19 +9,21 @@ namespace CleanStudentManagment.Models
 {
     public class StudentViewModel
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public StudentViewModel(Students students )
-        {
-            Id = students.Id;
-            Name = students.Name;
-        }
+        public int StudentId { get; set; }
+        public string StudentName { get; set; }
+        public string UserName { get; set; }
+        public string? Contact { get; set; }
 
-    }
-    public class CheckBoxTable
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public bool IsChecked { get; set; }
+        public StudentViewModel()
+        {
+            
+        }
+        public StudentViewModel(Students students)
+        {
+            StudentId = students.Id;
+            StudentName = students.Name;
+            UserName = students.UserName;
+            Contact = students.ContactNumber;
+        }
     }
 }

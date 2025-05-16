@@ -91,12 +91,12 @@ namespace CleanStudentManagment.BLL.Services
             }
         }
 
-        IEnumerable<StudentViewModel> IStudentService.GetAllStudents()
+        IEnumerable<StudentsViewModel> IStudentService.GetAll()
         {
             try
             {
                 var Students = _unitOfWork.GenericRepository<Students>().GetAll().ToList();
-                List<StudentViewModel> StudentViewModelList = new List<StudentViewModel>();
+                List<StudentsViewModel> StudentViewModelList = new List<StudentsViewModel>();
                 StudentViewModelList = ListInfo(Students);
                 return StudentViewModelList;
             }
@@ -107,9 +107,40 @@ namespace CleanStudentManagment.BLL.Services
             }
             
         }
-        private List<StudentViewModel> ListInfo(List<Students> StudentList)
+        private List<StudentsViewModel> ListInfo(List<Students> StudentList)
         {
-            return StudentList.Select(x=>new StudentViewModel(x)).ToList();
+            return StudentList.Select(x=>new StudentsViewModel(x)).ToList();
+        }
+
+        private List<StudentViewModel> ConvertToStudentVM(List<Students> StudentList)
+        {
+            return StudentList.Select(x => new StudentViewModel(x)).ToList();
+        }
+
+        public PagedResult<StudentViewModel> GetAllStudents(int pageNumber, int pageSize)
+        {
+            try
+            {
+                int excludeRecords = (pageSize * pageNumber) - pageSize;
+                List<StudentViewModel> StudentViewModels = new List<StudentViewModel>();
+                var studentsList = _unitOfWork.GenericRepository<Students>()
+                    .GetAll()
+                    .Skip(excludeRecords).Take(pageSize).ToList();
+                StudentViewModels = ConvertToStudentVM(studentsList);
+                var result = new PagedResult<StudentViewModel>
+                {
+                    Data = StudentViewModels,
+                    TotalItems = _unitOfWork.GenericRepository<Exams>().GetAll().Count(),
+                    PageNumber = pageNumber,
+                    PageSize = pageSize
+                };
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

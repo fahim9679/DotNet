@@ -19,9 +19,9 @@ namespace CleanStudentManagment.UI.Controllers
             _qnAsService = qnAsService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber = 1, int pageSize = 10)
         {
-            return View();
+            return View(_studentService.GetAllStudents(pageNumber,pageSize));
         }
         [HttpGet]
         public IActionResult Create()
@@ -77,9 +77,9 @@ namespace CleanStudentManagment.UI.Controllers
             return View(); 
         }
         [HttpGet]
-        public IActionResult Result(int studentId)
+        public IActionResult Result(int Id)
         {
-            var result = _studentService.GetStudentResult(studentId);
+            var result = _studentService.GetStudentResult(Id);
             if (result != null)
             {
                 return View(result);

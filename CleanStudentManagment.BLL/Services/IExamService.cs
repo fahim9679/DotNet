@@ -9,7 +9,7 @@ namespace CleanStudentManagment.BLL.Services
 {
     public interface IExamService
     {
-        PagedResult<ExamViewModel> GetAllExams(int pageNumber, int pageSize);
+        PagedResult<ExamViewModel> GetAll(int pageNumber, int pageSize);
         void AddExam(CreateExamVeiwModel examViewModel);
         IEnumerable<ExamViewModel> GetAllExams();
     }

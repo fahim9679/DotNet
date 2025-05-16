@@ -18,7 +18,7 @@ namespace CleanStudentManagment.UI.Controllers
 
         public IActionResult Index(int pageNumber=1,int pageSize=10)
         {
-            var exams = _examService.GetAllExams(pageNumber,pageSize);
+            var exams = _examService.GetAll(pageNumber,pageSize);
             return View();
         }
         [HttpGet]

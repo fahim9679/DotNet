@@ -12,7 +12,10 @@ namespace CleanStudentManagment.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-
+        public GroupViewModel()
+        {
+            
+        }
         public Groups ConvertToGroup(GroupViewModel groupViewModel)
         {
             return new Groups { Id = groupViewModel.Id, Name = groupViewModel.Name, Description = groupViewModel.Description };

@@ -35,7 +35,7 @@ namespace CleanStudentManagment.BLL.Services
             
         }
 
-        public PagedResult<ExamViewModel> GetAllExams(int pageNumber, int pageSize)
+        public PagedResult<ExamViewModel> GetAll(int pageNumber, int pageSize)
         {
             try
             {
