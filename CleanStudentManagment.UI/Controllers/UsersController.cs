@@ -1,9 +1,11 @@
 ﻿using CleanStudentManagment.BLL.Services;
 using CleanStudentManagment.Models;
+using CleanStudentManagment.UI.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanStudentManagment.UI.Controllers
 {
+    [RoleAuthorize(1)]
     public class UsersController : Controller
     {
         private readonly IAccountService _accountService;

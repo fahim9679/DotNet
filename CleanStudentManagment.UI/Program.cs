@@ -1,6 +1,7 @@
 using CleanStudentManagment.BLL.Services;
 using CleanStudentManagment.Data;
 using CleanStudentManagment.Data.UnitOfWork;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,14 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IExamService, ExamService>();
 builder.Services.AddScoped<IGroupService, GroupService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Accounts/Login"; // Redirect to login page if not authenticated
+        options.LogoutPath = "/Accounts/Logout"; // Redirect to logout page
+        options.AccessDeniedPath = "/Accounts/AccessDenied"; // Redirect to access denied page
+    });
 builder.Services.AddSession(options=>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30); // Set the session timeout to 30 minutes
@@ -32,7 +41,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseSession();
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
