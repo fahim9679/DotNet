@@ -7,8 +7,9 @@
 <h1>Profile</h1>
 <hr />
 <div class="row">
-    <div class="col-md-6">
-        <form asp-action="Profile">
+
+    <form asp-action="Profile" enctype="multipart/form-data">
+        <div class="col-md-6">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <input type="hidden" asp-for="Id" class="form-control" />
@@ -29,36 +30,32 @@
                 <input asp-for="ContactNumber" class="form-control" />
                 <span asp-validation-for="ContactNumber" class="text-danger"></span>
             </div>
-
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+        <div class="col-md-6">
+            <div>
+                <img src="@(Model.ProfilePicture == null ? "/StudentImage/demo.png" : Model.ProfilePicture)" alt="Profile Image" class="img-thumbnail" style="width: 120px; height: 150px;" />
             </div>
-        </form>
-    </div>
-    <div class="col-md-6">
-        <div>
-            <img src="@(Model.ProfilePicture==null?"/StudentImage/demo.png":Model.ProfilePicture)" alt="Profile Image" class="img-thumbnail" style="width: 120px; height: 150px;" />
+            <div class="form-group">
+                <label asp-for="ProfilePictureUrl" class="control-label"></label>
+                <input asp-for="ProfilePictureUrl" class="form-control" />
+                <span asp-validation-for="ProfilePictureUrl" class="text-danger"></span>
+            </div>
+            <div>
+                @if (Model.CVFileName != null)
+                {
+                    <a href="@Model.CVFileName">Download CV</a>
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="CVFileUrl" class="control-label"></label>
+                <input asp-for="CVFileUrl" class="form-control" />
+                <span asp-validation-for="CVFileUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
         </div>
-        <div class="form-group">
-            <label asp-for="ProfilePictureUrl" class="control-label"></label>
-            <input asp-for="ProfilePictureUrl" class="form-control" />
-            <span asp-validation-for="ProfilePictureUrl" class="text-danger"></span>
-        </div>
-        <div>
-            @if(Model.CVFileName!=null)
-            {
-                <a href="@Model.CVFileName">Download CV</a>
-            }
-        </div>
-        <div class="form-group">
-            <label asp-for="CVFileUrl" class="control-label"></label>
-            <input asp-for="CVFileUrl" class="form-control" />
-            <span asp-validation-for="CVFileUrl" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Submit" class="btn btn-primary" />
-        </div>
-    </div>
+    </form>
 </div>
 
 <div>

@@ -26,7 +26,7 @@ namespace CleanStudentManagment.UI.Controllers
 
         public IActionResult Index(int pageNumber = 1, int pageSize = 10)
         {
-            return View(_studentService.GetAllStudents(pageNumber,pageSize));
+            return View(_studentService.GetAllStudents(pageNumber, pageSize));
         }
         [HttpGet]
         public IActionResult Profile()
@@ -35,27 +35,42 @@ namespace CleanStudentManagment.UI.Controllers
             if (sessionObj != null)
             {
                 LoginViewModel loginViewModel = JsonConvert.DeserializeObject<LoginViewModel>(sessionObj);
-                var studentDetails=_studentService.GetStudentById(loginViewModel.Id);
+                var studentDetails = _studentService.GetStudentById(loginViewModel.Id);
                 if (studentDetails != null)
                 {
                     return View(studentDetails);
                 }
             }
-            return RedirectToAction("Login","Accounts");
+            return RedirectToAction("Login", "Accounts");
         }
         [HttpPost]
         public async Task<IActionResult> Profile(StudentProfileViewModel vm)
         {
-            if(vm.ProfilePictureUrl != null)
+            if (vm.ProfilePictureUrl != null)
             {
-                vm.ProfilePicture = await _utilityService.SaveImage(containerName,vm.ProfilePictureUrl);
+                if (vm.ProfilePicture != null)
+                {
+                    vm.ProfilePicture = await _utilityService.EditImage(containerName, vm.ProfilePictureUrl, vm.ProfilePicture);
+                }
+                else
+                {
+                    vm.ProfilePicture = await _utilityService.SaveImage(containerName, vm.ProfilePictureUrl);
+                }
+
             }
             if (vm.CVFileUrl != null)
             {
-                vm.CVFileName = await _utilityService.SaveImage(cvContainerName, vm.CVFileUrl);
+                if (vm.CVFileName != null)
+                {
+                    vm.CVFileName = await _utilityService.EditImage(cvContainerName, vm.CVFileUrl,vm.CVFileName);
+                }
+                else
+                {
+                    vm.CVFileName = await _utilityService.SaveImage(cvContainerName, vm.CVFileUrl);
+                }
             }
             _studentService.UpdateProfile(vm);
-            return View();
+            return RedirectToAction("Profile");
         }
         [HttpGet]
         public IActionResult Create()
@@ -105,10 +120,10 @@ namespace CleanStudentManagment.UI.Controllers
             return RedirectToAction("Login", "Accounts");
         }
         [HttpPost]
-        public IActionResult AttendExam( AttendExamViewModel viewModel)
-        { 
-            bool result=_studentService.SetExamResult(viewModel);
-            return View(); 
+        public IActionResult AttendExam(AttendExamViewModel viewModel)
+        {
+            bool result = _studentService.SetExamResult(viewModel);
+            return View();
         }
         [HttpGet]
         public IActionResult Result(int Id)

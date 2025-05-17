@@ -20,6 +20,10 @@ namespace CleanStudentManagment.Models
         public IFormFile CVFileUrl { get; set; }
         public string? ProfilePicture { get; set; }
         public IFormFile ProfilePictureUrl { get; set; }
+        public StudentProfileViewModel()
+        {
+            
+        }
         [System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute]
         public StudentProfileViewModel(Students student)
         {

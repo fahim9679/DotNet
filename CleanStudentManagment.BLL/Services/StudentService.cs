@@ -163,7 +163,7 @@ namespace CleanStudentManagment.BLL.Services
                     student.ContactNumber = vm.ContactNumber;
                     if (vm.CVFileUrl != null)
                     {
-                        student.CVFileName = vm.CVFileUrl.FileName;
+                        student.CVFileName = vm.CVFileName;
                     }
                     else
                     {
@@ -171,7 +171,7 @@ namespace CleanStudentManagment.BLL.Services
                     }
                     if (vm.ProfilePictureUrl != null)
                     {
-                        student.ProfilePicture = vm.ProfilePictureUrl.FileName;
+                        student.ProfilePicture = vm.ProfilePicture;
                     }
                     else
                     {
