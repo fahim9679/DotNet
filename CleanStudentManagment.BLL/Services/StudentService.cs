@@ -80,7 +80,7 @@ namespace CleanStudentManagment.BLL.Services
                     {
                         studentObj.GroupId = null;
                     }
-                    
+
                 }
                 _unitOfWork.Save();
                 return true;
@@ -105,11 +105,11 @@ namespace CleanStudentManagment.BLL.Services
 
                 throw;
             }
-            
+
         }
         private List<StudentsViewModel> ListInfo(List<Students> StudentList)
         {
-            return StudentList.Select(x=>new StudentsViewModel(x)).ToList();
+            return StudentList.Select(x => new StudentsViewModel(x)).ToList();
         }
 
         private List<StudentViewModel> ConvertToStudentVM(List<Students> StudentList)
@@ -141,6 +141,52 @@ namespace CleanStudentManagment.BLL.Services
 
                 throw;
             }
+        }
+
+        public StudentProfileViewModel GetStudentById(int id)
+        {
+            var student = _unitOfWork.GenericRepository<Students>().GetById(id);
+            var studentProfile = new StudentProfileViewModel(student);
+            return studentProfile;
+
+        }
+
+        public void UpdateProfile(StudentProfileViewModel vm)
+        {
+            try
+            {
+                var student = _unitOfWork.GenericRepository<Students>().GetById(vm.Id);
+                if (student != null)
+                {
+                    student.Name = vm.Name;
+                    student.UserName = vm.UserName;
+                    student.ContactNumber = vm.ContactNumber;
+                    if (vm.CVFileUrl != null)
+                    {
+                        student.CVFileName = vm.CVFileUrl.FileName;
+                    }
+                    else
+                    {
+                        student.CVFileName = vm.CVFileName;
+                    }
+                    if (vm.ProfilePictureUrl != null)
+                    {
+                        student.ProfilePicture = vm.ProfilePictureUrl.FileName;
+                    }
+                    else
+                    {
+                        student.ProfilePicture = vm.ProfilePicture;
+                    }
+                    _unitOfWork.GenericRepository<Students>().Update(student);
+                    _unitOfWork.Save();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }

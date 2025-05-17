@@ -15,5 +15,7 @@ namespace CleanStudentManagment.BLL.Services
         IEnumerable<ResultViewModel> GetStudentResult(int studentId);
         bool SetExamResult(AttendExamViewModel viewModel);
         bool SetGroupIdToStudent(GroupStudentViewModel viewModel);
+        StudentProfileViewModel GetStudentById(int id);
+        void UpdateProfile(StudentProfileViewModel vm);
     }
 }

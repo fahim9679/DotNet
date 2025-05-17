@@ -11,17 +11,51 @@ namespace CleanStudentManagment.UI.Controllers
         private readonly IStudentService _studentService;
         private readonly IExamService _examService;
         private readonly IQnAsService _qnAsService;
+        private readonly IUtilityService _utilityService;
 
-        public StudentsController(IStudentService studentService, IExamService examService, IQnAsService qnAsService)
+        private string containerName = "StudentImage";
+        private string cvContainerName = "StudentCV";
+
+        public StudentsController(IStudentService studentService, IExamService examService, IQnAsService qnAsService, IUtilityService utilityService)
         {
             _studentService = studentService;
             _examService = examService;
             _qnAsService = qnAsService;
+            _utilityService = utilityService;
         }
 
         public IActionResult Index(int pageNumber = 1, int pageSize = 10)
         {
             return View(_studentService.GetAllStudents(pageNumber,pageSize));
+        }
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            var sessionObj = HttpContext.Session.GetString("LoginDetails");
+            if (sessionObj != null)
+            {
+                LoginViewModel loginViewModel = JsonConvert.DeserializeObject<LoginViewModel>(sessionObj);
+                var studentDetails=_studentService.GetStudentById(loginViewModel.Id);
+                if (studentDetails != null)
+                {
+                    return View(studentDetails);
+                }
+            }
+            return RedirectToAction("Login","Accounts");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Profile(StudentProfileViewModel vm)
+        {
+            if(vm.ProfilePictureUrl != null)
+            {
+                vm.ProfilePicture = await _utilityService.SaveImage(containerName,vm.ProfilePictureUrl);
+            }
+            if (vm.CVFileUrl != null)
+            {
+                vm.CVFileName = await _utilityService.SaveImage(cvContainerName, vm.CVFileUrl);
+            }
+            _studentService.UpdateProfile(vm);
+            return View();
         }
         [HttpGet]
         public IActionResult Create()
