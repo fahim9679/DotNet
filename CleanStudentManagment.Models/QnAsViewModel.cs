@@ -19,6 +19,10 @@ namespace CleanStudentManagment.Models
         public string Option3 { get; set; }
         public string Option4 { get; set; }
         public int SelectedAnswer { get; set; }
+        public QnAsViewModel()
+        {
+            
+        }
         public QnAsViewModel(QnAs qnAs)
         {
             Id = qnAs.Id;

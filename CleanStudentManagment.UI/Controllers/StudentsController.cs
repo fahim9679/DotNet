@@ -62,7 +62,7 @@ namespace CleanStudentManagment.UI.Controllers
             {
                 if (vm.CVFileName != null)
                 {
-                    vm.CVFileName = await _utilityService.EditImage(cvContainerName, vm.CVFileUrl,vm.CVFileName);
+                    vm.CVFileName = await _utilityService.EditImage(cvContainerName, vm.CVFileUrl, vm.CVFileName);
                 }
                 else
                 {
@@ -108,7 +108,7 @@ namespace CleanStudentManagment.UI.Controllers
                     {
                         model.QnAsList = _qnAsService.GetAllQnAsByExamId(todayExam.Id).ToList();
                         model.ExamName = todayExam.Title;
-                        model.Message="";
+                        model.Message = "";
                         return View(model);
                     }
                     else
@@ -124,20 +124,27 @@ namespace CleanStudentManagment.UI.Controllers
         public IActionResult AttendExam(AttendExamViewModel viewModel)
         {
             bool result = _studentService.SetExamResult(viewModel);
-            return View();
+            return RedirectToAction("");
         }
         [HttpGet]
-        public IActionResult Result(int Id)
+        public IActionResult Result()
         {
-            var result = _studentService.GetStudentResult(Id);
-            if (result != null)
+
+            var sessionObj = HttpContext.Session.GetString("LoginDetails");
+            if (sessionObj != null)
             {
-                return View(result);
+                LoginViewModel loginViewModel = JsonConvert.DeserializeObject<LoginViewModel>(sessionObj);
+                var result = _studentService.GetStudentResult(loginViewModel.Id);
+                if (result != null)
+                {
+                    return View(result);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+            return RedirectToAction("Login","Accounts");
         }
     }
 }

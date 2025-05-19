@@ -22,6 +22,28 @@ namespace CleanStudentManagment.Data
         public DbSet<ExamResults> ExamResults { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ExamResults>(entity =>
+            {
+                entity.HasOne(d => d.Exams)
+                .WithMany(p => p.ExamResults)
+                .HasForeignKey(x => x.ExamId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fk_ExamResults_Exams");
+
+                entity.HasOne(d => d.QnAs)
+                .WithMany(p => p.ExamResults)
+                .HasForeignKey(p => p.QnAsId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fk_ExamResults_QnAs");
+
+                entity.HasOne(d => d.Students)
+                .WithMany(p => p.ExamResults)
+                .HasForeignKey(p => p.StudentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fk_ExamResults_Students");
+
+            });
+
             modelBuilder.Entity<Users>().HasData(new Users { Id = 1, Name = "Admin", UserName = "admin", Password = "admin", Role = 1 });
             base.OnModelCreating(modelBuilder);
         }

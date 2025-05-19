@@ -35,7 +35,31 @@ namespace CleanStudentManagment.BLL.Services
 
         public IEnumerable<ResultViewModel> GetStudentResult(int studentId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var examResults =_unitOfWork.GenericRepository<ExamResults>().GetAll()
+                    .Where(x=>x.StudentId == studentId);
+                var studnets = _unitOfWork.GenericRepository<Students>().GetAll();
+                var exams = _unitOfWork.GenericRepository<Exams>().GetAll();
+                var qnAs = _unitOfWork.GenericRepository<QnAs>().GetAll();
+                var requiredData=examResults.Join(studnets,er=>er.StudentId,s=>s.Id,(er,s)=>new {er,s})
+                    .Join(exams,es=>es.er.ExamId,e=>e.Id,(es,e)=>new {es,e})
+                    .Join(qnAs,ese=>ese.es.er.QnAsId,q=>q.Id,(ese,q)=>new ResultViewModel
+                    {
+                        StudentId=studentId,
+                        ExamName = ese.e.Title,
+                        TotalQuestions = examResults.Count(a=>a.StudentId==studentId && a.ExamId==ese.e.Id),
+                        CorrectAnser = examResults.Count(a=>a.StudentId==studentId && a.ExamId==ese.e.Id && a.Answer==q.Answer),
+                        WrongAnswer = examResults.Count(a=>a.StudentId==studentId && a.ExamId==ese.e.Id && a.Answer != q.Answer),
+                    });
+                return requiredData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return Enumerable.Empty<ResultViewModel>();
         }
 
         public bool SetExamResult(AttendExamViewModel viewModel)
@@ -48,8 +72,8 @@ namespace CleanStudentManagment.BLL.Services
                     {
                         StudentId = viewModel.StudentId,
                         ExamId = item.ExamId,
-                        //QnAsId = item.Id,
-                        Answer = item.Answer,
+                        QnAsId = item.Id,
+                        Answer = item.SelectedAnswer,
                     };
                     _unitOfWork.GenericRepository<ExamResults>().Add(results);
                     _unitOfWork.Save();

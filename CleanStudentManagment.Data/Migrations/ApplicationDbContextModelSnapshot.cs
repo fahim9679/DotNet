@@ -36,20 +36,19 @@ namespace CleanStudentManagment.Data.Migrations
                     b.Property<int>("ExamId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ExamsId")
+                    b.Property<int>("QnAsId")
                         .HasColumnType("int");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudentsId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ExamsId");
+                    b.HasIndex("ExamId");
 
-                    b.HasIndex("StudentsId");
+                    b.HasIndex("QnAsId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("ExamResults");
                 });
@@ -238,15 +237,27 @@ namespace CleanStudentManagment.Data.Migrations
                 {
                     b.HasOne("CleanStudentManagment.Data.Entities.Exams", "Exams")
                         .WithMany("ExamResults")
-                        .HasForeignKey("ExamsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ExamId")
+                        .IsRequired()
+                        .HasConstraintName("Fk_ExamResults_Exams");
 
-                    b.HasOne("CleanStudentManagment.Data.Entities.Students", null)
+                    b.HasOne("CleanStudentManagment.Data.Entities.QnAs", "QnAs")
                         .WithMany("ExamResults")
-                        .HasForeignKey("StudentsId");
+                        .HasForeignKey("QnAsId")
+                        .IsRequired()
+                        .HasConstraintName("Fk_ExamResults_QnAs");
+
+                    b.HasOne("CleanStudentManagment.Data.Entities.Students", "Students")
+                        .WithMany("ExamResults")
+                        .HasForeignKey("StudentId")
+                        .IsRequired()
+                        .HasConstraintName("Fk_ExamResults_Students");
 
                     b.Navigation("Exams");
+
+                    b.Navigation("QnAs");
+
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("CleanStudentManagment.Data.Entities.Exams", b =>
@@ -294,6 +305,11 @@ namespace CleanStudentManagment.Data.Migrations
                     b.Navigation("Exams");
 
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("CleanStudentManagment.Data.Entities.QnAs", b =>
+                {
+                    b.Navigation("ExamResults");
                 });
 
             modelBuilder.Entity("CleanStudentManagment.Data.Entities.Students", b =>
