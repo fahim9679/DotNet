@@ -108,6 +108,7 @@ namespace CleanStudentManagment.UI.Controllers
                     {
                         model.QnAsList = _qnAsService.GetAllQnAsByExamId(todayExam.Id).ToList();
                         model.ExamName = todayExam.Title;
+                        model.Message="";
                         return View(model);
                     }
                     else

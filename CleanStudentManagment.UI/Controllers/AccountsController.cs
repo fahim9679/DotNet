@@ -55,7 +55,7 @@ namespace CleanStudentManagment.UI.Controllers
                     return RedirectToAction("Index", "Exams");
                     break;                
                 default:
-                    return RedirectToAction("Index", "Students");
+                    return RedirectToAction("Profile", "Students");
             }
         }
 

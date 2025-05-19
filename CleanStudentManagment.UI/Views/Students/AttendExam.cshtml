@@ -1,0 +1,34 @@
+﻿@model AttendExamViewModel
+@{
+    ViewData["Title"] = "Attend Exam";
+}
+
+<h1>@Model.ExamName</h1>
+<h3>Exam paper</h3>
+@if(Model.Message=="")
+{
+    <form asp-action="AttendExam" asp-controller="Students" method="post">
+        <input type="hidden" asp-for=@Model.StudentId  />
+        <ul>
+            @for (int i = 0; i < Model.QnAsList.Count; i++)
+            {
+                
+                <li>
+                    <input type="hidden" asp-for="@Model.QnAsList[i].Id" />
+                    <input type="hidden" asp-for="@Model.QnAsList[i].ExamId" />
+                    <label for="@Model.QnAsList[i].QuestionTitle">@Model.QnAsList[i].QuestionTitle</label>
+                </li>
+                <li>
+                    <select asp-for="@Model.QnAsList[i].Answer" class="form-control">
+                        <option value="1">@Model.QnAsList[i].Option1</option>
+                        <option value="2">@Model.QnAsList[i].Option2</option>
+                        <option value="3">@Model.QnAsList[i].Option3</option>
+                        <option value="4">@Model.QnAsList[i].Option4</option>
+                    </select>
+                </li>
+            })
+        </ul>
+        <button type="submit">Submit</button>
+    </form>
+}
+

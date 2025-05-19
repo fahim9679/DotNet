@@ -41,7 +41,9 @@ namespace CleanStudentManagment.BLL.Services
             {
                 int excludeRecords = (pageSize * pageNumber) - pageSize;
                 List<GroupViewModel> groupViewModel = new List<GroupViewModel>();
-                var groupList = _unitOfWork.GenericRepository<Groups>().GetAll().Skip(excludeRecords).Take(pageSize).ToList();
+                var groupList = _unitOfWork.GenericRepository<Groups>()
+                    .GetAll()
+                    .Skip(excludeRecords).Take(pageSize).ToList();
                 groupViewModel = ListInfo(groupList);
                 var result = new PagedResult<GroupViewModel>
                 {
