@@ -66,8 +66,8 @@ namespace CleanStudentManagment.BLL.Services
 
         public bool IsAttended(int examId, int studentId)
         {
-            var Result= _unitOfWork.GenericRepository<ExamResults>().GetAll().Where(x => x.Id == examId && x.StudentId == studentId);
-            return Result==null ? false : true;
+            var Result= _unitOfWork.GenericRepository<ExamResults>().GetAll().Any(x => x.Id == examId && x.StudentId == studentId);
+            return Result==false ? false : true;
         }
 
         private List<QnAsViewModel> ListInfo(List<QnAs> qnAsList)

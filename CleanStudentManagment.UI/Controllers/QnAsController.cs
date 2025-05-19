@@ -28,7 +28,7 @@ namespace CleanStudentManagment.UI.Controllers
             ViewBag.examList=new SelectList(exams, "Id", "Title");
             return View();
         }
-        [HttpGet]
+        [HttpPost]
         public IActionResult Create(CreateQnAsViewModel vm)
         {
             _qnAsService.AddQnAs(vm);
