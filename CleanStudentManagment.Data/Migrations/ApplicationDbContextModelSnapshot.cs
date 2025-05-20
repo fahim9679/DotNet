@@ -33,7 +33,7 @@ namespace CleanStudentManagment.Data.Migrations
                     b.Property<int>("Answer")
                         .HasColumnType("int");
 
-                    b.Property<int>("ExamId")
+                    b.Property<int>("ExamsId")
                         .HasColumnType("int");
 
                     b.Property<int>("QnAsId")
@@ -44,7 +44,7 @@ namespace CleanStudentManagment.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExamId");
+                    b.HasIndex("ExamsId");
 
                     b.HasIndex("QnAsId");
 
@@ -64,9 +64,6 @@ namespace CleanStudentManagment.Data.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
 
                     b.Property<int>("GroupsId")
                         .HasColumnType("int");
@@ -120,9 +117,6 @@ namespace CleanStudentManagment.Data.Migrations
                     b.Property<int>("Answer")
                         .HasColumnType("int");
 
-                    b.Property<int>("ExamId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ExamsId")
                         .HasColumnType("int");
 
@@ -167,10 +161,7 @@ namespace CleanStudentManagment.Data.Migrations
                     b.Property<string>("ContactNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GroupsId")
+                    b.Property<int?>("GroupsId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -237,7 +228,7 @@ namespace CleanStudentManagment.Data.Migrations
                 {
                     b.HasOne("CleanStudentManagment.Data.Entities.Exams", "Exams")
                         .WithMany("ExamResults")
-                        .HasForeignKey("ExamId")
+                        .HasForeignKey("ExamsId")
                         .IsRequired()
                         .HasConstraintName("Fk_ExamResults_Exams");
 
@@ -286,9 +277,7 @@ namespace CleanStudentManagment.Data.Migrations
                 {
                     b.HasOne("CleanStudentManagment.Data.Entities.Groups", "Groups")
                         .WithMany("Students")
-                        .HasForeignKey("GroupsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GroupsId");
 
                     b.Navigation("Groups");
                 });

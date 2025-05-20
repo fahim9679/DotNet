@@ -23,7 +23,7 @@ namespace CleanStudentManagment.Models
                 Description = examViewModel.Description,
                 StartDate = examViewModel.StartDate,
                 Time = examViewModel.Time,
-                GroupId = examViewModel.GroupId
+                GroupsId = examViewModel.GroupId
             };
         }
     }

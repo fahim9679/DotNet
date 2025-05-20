@@ -71,7 +71,7 @@ namespace CleanStudentManagment.BLL.Services
             try
             {
                 List<ExamViewModel> examList = new List<ExamViewModel>();
-                var exams = _unitOfWork.GenericRepository<Exams>().GetAll().ToList();
+                var exams = _unitOfWork.GenericRepository<Exams>().GetAll(includeProperties:"Groups").ToList();
                 examList = ListInfo(exams);
                 return examList;
             }

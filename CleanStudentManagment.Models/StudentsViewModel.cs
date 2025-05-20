@@ -17,7 +17,7 @@ namespace CleanStudentManagment.Models
         {
             Id = students.Id;
             Name = students.Name;
-            GroupId = students.GroupId;
+            GroupId = students.GroupsId;
         }
 
     }

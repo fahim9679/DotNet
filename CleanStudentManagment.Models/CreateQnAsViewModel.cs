@@ -23,7 +23,7 @@ namespace CleanStudentManagment.Models
             {
                 QuestionTitle = vm.QuestionTitle,
                 Answer = vm.Answer,
-                ExamId = vm.ExamId,
+                ExamsId = vm.ExamId,
                 Option1 = vm.Option1,
                 Option2 = vm.Option2,
                 Option3 = vm.Option3,

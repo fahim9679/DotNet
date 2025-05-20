@@ -13,7 +13,7 @@ namespace CleanStudentManagment.Data.Entities
         public virtual Students Students { get; set; }
         public int QnAsId { get; set; }
         public virtual QnAs QnAs { get; set; }
-        public int ExamId { get; set; }
+        public int ExamsId { get; set; }
         public virtual Exams Exams { get; set; }
         public int Answer { get; set; }
     }

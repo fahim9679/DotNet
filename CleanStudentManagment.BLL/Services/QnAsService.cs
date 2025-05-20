@@ -60,7 +60,7 @@ namespace CleanStudentManagment.BLL.Services
 
         public IEnumerable<QnAsViewModel> GetAllQnAsByExamId(int examId)
         {
-            var qnAs= _unitOfWork.GenericRepository<QnAs>().GetAll().Where(x => x.ExamId == examId).ToList();
+            var qnAs= _unitOfWork.GenericRepository<QnAs>().GetAll().Where(x => x.ExamsId == examId).ToList();
             return ListInfo(qnAs);
         }
 

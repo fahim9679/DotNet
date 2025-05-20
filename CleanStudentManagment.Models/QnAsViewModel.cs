@@ -29,7 +29,7 @@ namespace CleanStudentManagment.Models
             Id = qnAs.Id;
             QuestionTitle = qnAs.QuestionTitle;
             ExamName = qnAs.Exams.Title;
-            ExamId=qnAs.ExamId;
+            ExamId=qnAs.ExamsId;
             Answer = qnAs.Answer;
             Option1 = qnAs.Option1;
             Option2 = qnAs.Option2;

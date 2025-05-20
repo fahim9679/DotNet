@@ -43,14 +43,14 @@ namespace CleanStudentManagment.BLL.Services
                 var exams = _unitOfWork.GenericRepository<Exams>().GetAll();
                 var qnAs = _unitOfWork.GenericRepository<QnAs>().GetAll();
                 var requiredData=examResults.Join(studnets,er=>er.StudentId,s=>s.Id,(er,s)=>new {er,s})
-                    .Join(exams,es=>es.er.ExamId,e=>e.Id,(es,e)=>new {es,e})
+                    .Join(exams,es=>es.er.ExamsId,e=>e.Id,(es,e)=>new {es,e})
                     .Join(qnAs,ese=>ese.es.er.QnAsId,q=>q.Id,(ese,q)=>new ResultViewModel
                     {
                         StudentId=studentId,
                         ExamName = ese.e.Title,
-                        TotalQuestions = examResults.Count(a=>a.StudentId==studentId && a.ExamId==ese.e.Id),
-                        CorrectAnser = examResults.Count(a=>a.StudentId==studentId && a.ExamId==ese.e.Id && a.Answer==q.Answer),
-                        WrongAnswer = examResults.Count(a=>a.StudentId==studentId && a.ExamId==ese.e.Id && a.Answer != q.Answer),
+                        TotalQuestions = examResults.Count(a=>a.StudentId==studentId && a.ExamsId ==ese.e.Id),
+                        CorrectAnser = examResults.Count(a=>a.StudentId==studentId && a.ExamsId ==ese.e.Id && a.Answer==q.Answer),
+                        WrongAnswer = examResults.Count(a=>a.StudentId==studentId && a.ExamsId ==ese.e.Id && a.Answer != q.Answer),
                     });
                 return requiredData;
             }
@@ -71,7 +71,7 @@ namespace CleanStudentManagment.BLL.Services
                     ExamResults results = new ExamResults
                     {
                         StudentId = viewModel.StudentId,
-                        ExamId = item.ExamId,
+                        ExamsId = item.ExamId,
                         QnAsId = item.Id,
                         Answer = item.SelectedAnswer,
                     };
@@ -97,12 +97,12 @@ namespace CleanStudentManagment.BLL.Services
                     var studentObj = _unitOfWork.GenericRepository<Students>().GetById(student.Id);
                     if (student.IsChecked == true)
                     {
-                        studentObj.GroupId = viewModel.GroupId;
+                        studentObj.GroupsId = viewModel.GroupId;
                         _unitOfWork.GenericRepository<Students>().Update(studentObj);
                     }
                     else
                     {
-                        studentObj.GroupId = null;
+                        studentObj.GroupsId = null;
                     }
 
                 }

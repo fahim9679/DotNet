@@ -26,7 +26,7 @@ namespace CleanStudentManagment.Data
             {
                 entity.HasOne(d => d.Exams)
                 .WithMany(p => p.ExamResults)
-                .HasForeignKey(x => x.ExamId)
+                .HasForeignKey(x => x.ExamsId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Fk_ExamResults_Exams");
 
