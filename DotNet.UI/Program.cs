@@ -1,21 +1,15 @@
 using DotNet.Repositories;
 using DotNet.Repositories.Implementations;
 using DotNet.Repositories.Interfaces;
+using DotNet.UI.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("DotNet.UI")));
+
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<ICountryRepo, CountryRepo>();
-builder.Services.AddScoped<IStateRepo, StateRepo>();
-builder.Services.AddScoped<ICityRepo, CityRepo>();
-builder.Services.AddScoped<IUserRepo, UserRepo>();
-builder.Services.AddScoped<ISkillRepo, SkillRepo>();
-builder.Services.AddScoped<IStudentRepo, StudentRepo>();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddApplicationServices(builder.Configuration);
 
 builder.Services.AddSession(options =>
 {

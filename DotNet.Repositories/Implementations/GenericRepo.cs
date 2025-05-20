@@ -96,5 +96,10 @@ namespace DotNet.Repositories.Implementations
             await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
+
+        void IGenericRepo<T>.DeleteRange(List<T> entities)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -27,19 +27,22 @@ namespace CleanStudentManagment.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            LoginViewModel vm = _accountService.Login(model);
-            if (vm != null)
+            if (ModelState.IsValid)
             {
-                string sessionObject = JsonSerializer.Serialize(vm);
-                HttpContext.Session.SetString("LoginDetails", sessionObject);
-                var claims = new List<Claim>
+                LoginViewModel vm = _accountService.Login(model);
+                if (vm != null)
+                {
+                    string sessionObject = JsonSerializer.Serialize(vm);
+                    HttpContext.Session.SetString("LoginDetails", sessionObject);
+                    var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, vm.UserName),
                     new Claim(ClaimTypes.Role, vm.Role.ToString())
                 };
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                return RedirectToLogin(vm);
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                    return RedirectToLogin(vm);
+                }
             }
             return View(model);
         }
