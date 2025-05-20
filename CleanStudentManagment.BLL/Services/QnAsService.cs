@@ -40,7 +40,7 @@ namespace CleanStudentManagment.BLL.Services
             {
                 int excludeRecords = (pageSize * pageNumber) - pageSize;
                 List<QnAsViewModel> qnAsViewModels = new List<QnAsViewModel>();
-                var qnAsList = _unitOfWork.GenericRepository<QnAs>().GetAll().Skip(excludeRecords).Take(pageSize).ToList();
+                var qnAsList = _unitOfWork.GenericRepository<QnAs>().GetAll(includeProperties:"Exams").Skip(excludeRecords).Take(pageSize).ToList();
                 qnAsViewModels = ListInfo(qnAsList);
                 var result = new PagedResult<QnAsViewModel>
                 {

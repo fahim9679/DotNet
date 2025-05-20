@@ -49,7 +49,7 @@ namespace CleanStudentManagment.UI.Controllers
                 {
                     Id = student.Id,
                     Name = student.Name,
-                    IsChecked = false
+                    IsChecked = student.GroupId == null ? false : true
                 });
             }
             return View(vm);

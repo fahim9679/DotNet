@@ -1,10 +1,12 @@
 ﻿using CleanStudentManagment.BLL.Services;
 using CleanStudentManagment.Models;
+using CleanStudentManagment.UI.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CleanStudentManagment.UI.Controllers
 {
+    [RoleAuthorize(2)]
     public class ExamsController : Controller
     {
         private readonly IGroupService _groupService;

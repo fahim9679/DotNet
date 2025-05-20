@@ -12,6 +12,7 @@ namespace CleanStudentManagment.Models
     {
         public int Id { get; set; }
         public string QuestionTitle { get; set; }
+        public string ExamName { get; set; }
         public int ExamId { get; set; }
         public int Answer { get; set; }
         public string Option1 { get; set; }
@@ -27,7 +28,8 @@ namespace CleanStudentManagment.Models
         {
             Id = qnAs.Id;
             QuestionTitle = qnAs.QuestionTitle;
-            ExamId = qnAs.ExamId;
+            ExamName = qnAs.Exams.Title;
+            ExamId=qnAs.ExamId;
             Answer = qnAs.Answer;
             Option1 = qnAs.Option1;
             Option2 = qnAs.Option2;

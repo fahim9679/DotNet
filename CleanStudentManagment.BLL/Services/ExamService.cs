@@ -42,7 +42,7 @@ namespace CleanStudentManagment.BLL.Services
                 int excludeRecords = (pageSize * pageNumber) - pageSize;
                 List<ExamViewModel> examViewModels = new List<ExamViewModel>();
                 var examList = _unitOfWork.GenericRepository<Exams>()
-                    .GetAll()
+                    .GetAll(includeProperties:"Groups")
                     .Skip(excludeRecords).Take(pageSize).ToList();
                 examViewModels = ListInfo(examList);
                 var result = new PagedResult<ExamViewModel>
