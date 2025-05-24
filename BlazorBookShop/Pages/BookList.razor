@@ -1,0 +1,52 @@
+﻿@page "/books"
+<h3>BookList</h3>
+<span>@book.Title</span>
+
+<div>
+    <h4>Book Details</h4>
+    <p>Id: @book.Id</p>
+    <p>Title: @book.Title</p>
+</div>
+
+@if (books != null)
+{
+    <div>
+        <h4>Book List using foreach</h4>
+        <ul>
+            @foreach (var b in books)
+            {
+                <li>@b.Title </li>
+            }
+        </ul>
+        <h4>Book List using for</h4>
+        <ul>
+            @for (int i = 0; i < books.Count; i++)
+            {
+                <li> <b>@((i + 1)) @books[i].Title </b></li>
+            }
+
+        </ul>
+    </div>
+}
+else
+{
+   @*  <Text>Loading....</Text> *@
+    <img src="https://media3.giphy.com/media/emySgWo0iBKWqni1wR/giphy.gif?cid=6c09b952abnx7sq6kq8k677d5b9qkzje82m0ze393vm8ydy2&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g" alt="Loading..." />
+}
+
+@code {
+    Book book = new Book { Id = 1, Title = "Book 1" };
+    List<Book> books;
+    protected async override Task OnInitializedAsync()
+    {
+        // Initialization logic can go here if needed
+        await Task.Delay(5000); // Simulating async data fetch
+        books = new List<Book>()
+    {
+        new Book { Id = 1, Title = "Bookl 1" },
+        new Book { Id = 2, Title = "Bookl 2" },
+        new Book { Id = 3, Title = "Bookl 3" }
+    };
+        base.OnInitialized();
+    }
+}

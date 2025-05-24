@@ -1,0 +1,42 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>@message.ToUpper()</h1>
+
+Welcome to your new app.
+<p>Add  2 Numbers 2 + 2=@(2+2)</p>
+
+<button @onclick=@(() => Console.WriteLine("Hello, fahim!"))>Clike Me!</button>
+
+<button @onclick=Method1>Clike Me!</button>
+
+
+<button @onclick=@(() => ConsoleClass.WriteLine())>Clike Me!</button>
+
+<button @onclick=@(() => ConsoleClass1.WriteLine())>Clike Me!</button>
+
+
+
+    
+
+@code{
+    string message = "Hello, fahim!";
+    public void Method1()
+    {
+        message = "ok, fahim!";
+        Console.WriteLine(message);
+    }
+    
+}
+
+
+@code {
+    public class ConsoleClass
+    {
+        public static void WriteLine()
+        {
+            Console.WriteLine("Hello, fahim!");
+        }
+    }
+}
