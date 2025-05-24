@@ -16,11 +16,30 @@ Welcome to your new app.
 
 <button @onclick=@(() => ConsoleClass1.WriteLine())>Clike Me!</button>
 
-
+<BookList1 books="books" >
+    @if (books == null)
+    {
+        <span style="color:red">  Book list is empty</span>
+    }
+    
+</BookList1>
 
     
 
 @code{
+    List<Book> books;
+    protected async override Task OnInitializedAsync()
+    {
+        // Initialization logic can go here if needed
+        await Task.Delay(3000); // Simulating async data fetch
+        books = new List<Book>()
+    {
+        new Book { Id = 1, Title = "Bookl 1 home" },
+        new Book { Id = 2, Title = "Bookl 2 home" },
+        new Book { Id = 3, Title = "Bookl 3 home" }
+    };
+        base.OnInitialized();
+    }
     string message = "Hello, fahim!";
     public void Method1()
     {

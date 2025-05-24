@@ -1,0 +1,17 @@
+﻿<h3>BookDetails</h3>
+<p style="color:red">
+    <b>
+        @book.Title
+    </b>
+    @if (IsVisible)
+    {
+        <button @onclick="@(()=>OnDelete.InvokeAsync(book))">Delete</button>
+    }
+    
+</p>
+@code {
+    [Parameter] public Book book { get; set; }
+    [Parameter] public bool IsVisible { get; set; } = false;
+    [Parameter] public EventCallback<Book> OnDelete { get; set; }
+    
+}

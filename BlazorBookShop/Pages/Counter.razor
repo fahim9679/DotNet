@@ -8,7 +8,31 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+<BookList1 books="books" />
+
 @code {
+    List<Book> books;
+    protected async override Task OnInitializedAsync()
+    {
+        // Initialization logic can go here if needed
+        await Task.Delay(3000); // Simulating async data fetch
+        books = new List<Book>()
+    {
+        new Book { Id = 1, Title = "Bookl 1 counter" },
+        new Book { Id = 2, Title = "Bookl 2 counter" },
+        new Book { Id = 3, Title = "Bookl 3 counter" }
+    };
+        base.OnInitialized();
+    }
+    string message = "Hello, fahim!";
+    public void Method1()
+    {
+        message = "ok, fahim!";
+        Console.WriteLine(message);
+    }
+
+
+
     private int currentCount = 0;
 
     private void IncrementCount()

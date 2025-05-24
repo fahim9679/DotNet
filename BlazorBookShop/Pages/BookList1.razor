@@ -1,0 +1,40 @@
+﻿@* @page "/books" *@
+
+@if (books != null)
+{
+    <div>
+        <h4>Book List</h4>
+        <input type="checkbox" @onclick="() => IsVisible = !IsVisible" /> Toggel Buttons
+        <ul>
+            @foreach (var b in books)
+            {
+                <BookDetails book="@b" IsVisible="@IsVisible" OnDelete="DeleteMethod" />
+            }
+        </ul>        
+    </div>
+}
+else
+{
+
+   @*  <Text>Loading....</Text> *@
+    @* <img src="https://media3.giphy.com/media/emySgWo0iBKWqni1wR/giphy.gif?cid=6c09b952abnx7sq6kq8k677d5b9qkzje82m0ze393vm8ydy2&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g" alt="Loading..." /> *@
+    @* <span style="color:red">@ChildContent </span> *@
+    if (ChildContent==null)
+    {
+        <img src="https://media3.giphy.com/media/emySgWo0iBKWqni1wR/giphy.gif?cid=6c09b952abnx7sq6kq8k677d5b9qkzje82m0ze393vm8ydy2&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g" alt="Loading..." />
+    }
+    else
+    {
+        @ChildContent
+    }
+}
+
+@code {
+    [Parameter] public List<Book> books { get; set; } 
+    [Parameter] public RenderFragment ChildContent { get; set; } 
+    public bool IsVisible { get; set; } = false;
+    public void DeleteMethod(Book book)
+    {
+        books.Remove(book);
+    }
+}
